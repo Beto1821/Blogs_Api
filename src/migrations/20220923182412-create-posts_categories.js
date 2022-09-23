@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: (queryInterface, Sequelize) => {
 
-     await queryInterface.createTable('posts_categories', {
+     queryInterface.createTable('posts_categories', {
       post_id: {
         primaryKey: true,
         allowNull: false,
@@ -30,5 +30,5 @@ module.exports = {
     
   },
 
-  down: async (queryInterface, _Sequelize) => queryInterface.dropTable('posts_categories')
+  down: (queryInterface, _Sequelize) => queryInterface.dropTable('posts_categories')
 };
