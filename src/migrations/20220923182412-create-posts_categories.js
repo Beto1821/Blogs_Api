@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
 
-     queryInterface.createTable('posts_categories', {
+     return queryInterface.createTable('posts_categories', {
       post_id: {
         primaryKey: true,
         allowNull: false,
@@ -30,5 +30,5 @@ module.exports = {
     
   },
 
-  down: (queryInterface, _Sequelize) => queryInterface.dropTable('posts_categories')
+  down: async (queryInterface, _Sequelize) => queryInterface.dropTable('posts_categories')
 };
