@@ -20,6 +20,15 @@ const token = geraToken(req.body.email);
 return res.status(201).json({ token });
 };
 
+const get = async (req, res) => {
+const users = await User.findAll({
+  attributes: { exclude: ['password'] },
+});
+
+return res.status(200).json(users);
+};
+
 module.exports = {
   insert,
+  get,
 };
