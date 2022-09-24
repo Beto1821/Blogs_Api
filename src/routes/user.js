@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { insert, get } = require('../controllers/user');
-const validaToken = require('../middlewares/validaToken')
+const validaToken = require('../middlewares/validaToken');
 
 const userRoutes = Router();
 
