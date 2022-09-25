@@ -11,7 +11,7 @@ const insert = async (req, res) => {
   const user = await User.findOne({ where: { email: req.body.email } });
   if (user) {
     return res.status(409).json({ message: 'User already registered' });
-  };
+  }
   await User.create({ displayName, email, password, image });
   const token = geraToken(req.body.email);
   return res.status(201).json({ token });
@@ -29,9 +29,9 @@ const getId = async (req, res) => {
   const userId = await User.findByPk(id, {
     attributes: { exclude: ['password'] },
   });
-  if(!userId) {
-    return res.status(404).json({ message: 'User does not exist' })
-  };
+  if (!userId) {
+    return res.status(404).json({ message: 'User does not exist' });
+  }
   return res.status(200).json(userId);
 };
 
