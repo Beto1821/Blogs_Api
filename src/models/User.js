@@ -30,8 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.BlogPost, { 
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
-      foreignKey: 'BlogPost_id', 
-      as: 'blogpostid', 
+      foreignKey: 'user_id', 
     });
   };
 
