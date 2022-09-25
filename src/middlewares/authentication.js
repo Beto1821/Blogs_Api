@@ -14,7 +14,6 @@ module.exports = async (req, res) => {
 
   if (error) return res.status(400).json({ message: 'Some required fields are missing' });
     
-  // https://sequelize.org/docs/v6/core-concepts/model-querying-finders/
   const user = await User.findOne({ where: { email: req.body.email } }).catch(console.log);
   console.log(typeof user);
   if (!user) return res.status(400).json({ message: 'Invalid fields' });

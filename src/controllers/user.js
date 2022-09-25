@@ -8,27 +8,35 @@ const insert = async (req, res) => {
   
   const { email, password, image, displayName } = req.body;
 
-  // https://sequelize.org/docs/v6/core-concepts/model-querying-finders/
-const user = await User.findOne({ where: { email: req.body.email } });
-
-if (user) return res.status(409).json({ message: 'User already registered' });
-
-await User.create({ displayName, email, password, image });
-  
-const token = geraToken(req.body.email);
-
-return res.status(201).json({ token });
+  const user = await User.findOne({ where: { email: req.body.email } });
+  if (user) {
+    return res.status(409).json({ message: 'User already registered' });
+  };
+  await User.create({ displayName, email, password, image });
+  const token = geraToken(req.body.email);
+  return res.status(201).json({ token });
 };
 
 const get = async (req, res) => {
-const users = await User.findAll({
+  const users = await User.findAll({
   attributes: { exclude: ['password'] },
 });
-
 return res.status(200).json(users);
+};
+
+const getId = async (req, res) => {
+  const { id } = req.params;
+  const userId = await User.findByPk(id, {
+    attributes: { exclude: ['password'] },
+  });
+  if(!userId) {
+    return res.status(404).json({ message: 'User does not exist' })
+  };
+  return res.status(200).json(userId);
 };
 
 module.exports = {
   insert,
   get,
+  getId,
 };
