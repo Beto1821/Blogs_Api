@@ -18,6 +18,6 @@ module.exports = async (req, res) => {
   console.log(typeof user);
   if (!user) return res.status(400).json({ message: 'Invalid fields' });
 
-  const token = geratoken(req.body.email);
+  const token = geratoken(req.body.email, req.body.id);
   res.status(200).json({ token });
 };

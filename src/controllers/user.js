@@ -1,6 +1,8 @@
 const { User } = require('../models');
 const geraToken = require('../util/geraToken');
+const decodeToken = require('../util/decoToken');
 const validaAddUser = require('../middlewares/validaAddUser');
+const UserService = require('../service/User')
 
 const insert = async (req, res) => {
   const { error } = validaAddUser(req.body);
@@ -35,8 +37,15 @@ const getId = async (req, res) => {
   return res.status(200).json(userId);
 };
 
+const deleteMe = async (req, res) => {
+  const { Authorization } = req.headers;
+  await UserService.deleteId(Authorization)
+  res.SendStatus(204);
+};
+
 module.exports = {
   insert,
   get,
   getId,
+  deleteMe,
 };
