@@ -16,22 +16,28 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       published: {
-        type: DataTypes.STRING,
+        type: DataTypes.DATE,
       },
       updated: {
-        type: DataTypes.STRING,
+        type: DataTypes.DATE,
       },         
     },
     {
-      timestamps: false,
-      tableName: 'users',
+      timestamps: true,
+      createdAt: 'published',
+      updatedAt: 'updated',
+      tableName: 'BlogPost',
       underscored: true,
     }
   );
 
     BlogPost.associate = (models) => {
-    BlogPost.belongsTo(models.User,
-      { foreignKey: 'id', as: 'BlogPostId' });
+    BlogPost.belongsTo(models.User, {
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE', 
+      foreignKey: 'user_id', 
+      as: 'userid', 
+    });
   };
 
   return BlogPost;
