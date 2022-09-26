@@ -2,7 +2,7 @@ const decoToken = require('../util/decoToken');
 const { User } = require('../models');
 
 const findId = async (Authorization) => {
-  const { id } = await User.findOne({ where: { email: decoToken(Authorization)}})
+  const { id } = await User.findOne({ where: { email: decoToken(Authorization) } });
   return id;
 };
 
