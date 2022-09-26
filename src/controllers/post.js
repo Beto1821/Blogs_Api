@@ -1,4 +1,3 @@
-const { BlogPost, User, Category, PostCategory } = require('../models');
 const postService = require('../service/Post');
 
 const get = async (_req, res) => {

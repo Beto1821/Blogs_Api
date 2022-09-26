@@ -8,7 +8,7 @@ const findId = async (Authorization) => {
 
 const deleteId = async (Authorization) => {
   const userId = await findId(Authorization);
-  await User.destroy({ where: { id: userId} })
+  await User.destroy({ where: { id: userId } });
 };
 
 module.exports = {
