@@ -8,7 +8,7 @@ const validaBody = (body) =>
     content: joi.string().required().messages({
       'string.empty': 'Some required fields are missing',
     }),
-    categoryIds: joi.required().messages({
+    categoryIds: joi.array().required().messages({
       empty: 'Some required fields are missing',
     }),
   }).validate(body);
