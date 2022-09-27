@@ -38,9 +38,9 @@ const getId = async (req, res) => {
 };
 
 const deleteMe = async (req, res) => {
-  const { Authorization } = req.headers;
-  await UserService.deleteId(Authorization);
-  res.SendStatus(204);
+  const { authorization } = req.headers;
+  await UserService.deleteId(authorization);
+  res.sendStatus(204);
 };
 
 module.exports = {
