@@ -37,8 +37,22 @@ const insert = async (postId, categoryId) => {
   await PostCategory.create({ postId, categoryId });
 };
 
+const update = async (id, title, content) => {
+  await BlogPost.update(
+    { 
+    title,
+    content,
+    }, {
+    where: { id },
+    },
+    );
+    const resUpdate = await getId(id);
+  return resUpdate;
+};
+
 module.exports = {
   get,
   getId,
   insert,
+  update,
 };

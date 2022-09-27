@@ -40,8 +40,31 @@ const insert = async (req, res) => {
       return res.status(201).json(inserted);
 };
 
+const updated = async (req, res) => {
+  const { title, content } = req.body;
+  const updateId = req.params.id;
+  const { authorization } = req.headers;
+
+    if (!title || !content) {
+    return res.status(400).json({ message: 'Some required fields are missing' });
+  }
+
+  const { dataValues: { id } } = await getUserId(authorization);
+  const post = await BlogPost.findOne({ updateId });
+
+  if (!post) return res.status(404).json({ message: 'Post does not exist' });
+
+  if (post.userId !== id) {
+    return res.status(401).json({ message: 'Unauthorized user' });
+  }
+
+  const updatedPost = await postService.update(updateId, title, content);
+  return res.status(200).json(updatedPost);
+};
+
 module.exports = {
   get,
   getId,
   insert,
+  updated,
 };
